@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const rootDir = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: 'client',
@@ -11,9 +14,9 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'client/index.html'),
-        admin: resolve(__dirname, 'client/admin.html'),
-        classes: resolve(__dirname, 'client/classes.html'),
+        main: resolve(rootDir, 'client/index.html'),
+        admin: resolve(rootDir, 'client/admin.html'),
+        classes: resolve(rootDir, 'client/classes.html'),
       },
     },
   },
