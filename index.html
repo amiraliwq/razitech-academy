@@ -3,13 +3,35 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<meta name="theme-color" content="#111827"/>
-<meta name="description" content="رازی‌تک؛ فروشگاه و آموزشگاه آنلاین رباتیک، برنامه‌نویسی، الکترونیک و طراحی برای دانش‌آموزان و علاقه‌مندان فناوری."/>
-<meta name="keywords" content="آموزش رباتیک, آردوینو, ESP32, پایتون, برنامه نویسی, قطعات الکترونیک, دوره آموزشی, رازی تک"/>
-<meta name="robots" content="index,follow"/>
-<title>رازی‌تک | آموزش، فروشگاه رباتیک و دستیار هوشمند</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#060914"/>
+<meta name="description" content="رازی‌تک؛ آکادمی پروژه‌محور رباتیک، برنامه‌نویسی و فناوری."/>
+<title>رازی‌تک | Academy</title>
+<link rel="stylesheet" href="https://raw.githubusercontent.com/amiraliwq/razitech-academy/main/client/src/style.css?v=4">
+<style>body{margin:0;background:#060914;color:#fff;font-family:system-ui,sans-serif}#boot{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px;box-sizing:border-box}#boot b{font-size:20px}#boot small{display:block;color:#94a3b8;margin-top:10px}</style>
+<script type="importmap">{"imports":{"react":"https://esm.sh/react@18.3.1","react-dom/client":"https://esm.sh/react-dom@18.3.1/client","@supabase/supabase-js":"https://esm.sh/@supabase/supabase-js@2.57.4"}}</script>
 </head>
-<body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body>
+<body>
+<div id="root"><div id="boot"><div><b>رازی‌تک</b><small>در حال بارگذاری آکادمی…</small></div></div></div>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="module">
+const sourceUrl='https://raw.githubusercontent.com/amiraliwq/razitech-academy/main/client/src/main.jsx?pages=4';
+const cssUrl='https://raw.githubusercontent.com/amiraliwq/razitech-academy/main/client/src/style.css?pages=4';
+try{
+  const response=await fetch(sourceUrl,{cache:'no-store'});
+  if(!response.ok) throw new Error('source '+response.status);
+  let code=await response.text();
+  code=code.replace("import'./style.css';",'');
+  code=code.replace(/import\.meta\.env\.VITE_SUPABASE_URL/g,JSON.stringify('https://zhexlpaugdnhnbylpoda.supabase.co'));
+  code=code.replace(/import\.meta\.env\.VITE_SUPABASE_PUBLISHABLE_KEY/g,JSON.stringify('sb_publishable_NtW6JGT8nKdAWYMu-xrVCg_MY9NcyN3'));
+  const transformed=Babel.transform(code,{presets:['react'],sourceType:'module'}).code;
+  const blob=new Blob([transformed],{type:'text/javascript'});
+  const moduleUrl=URL.createObjectURL(blob);
+  await import(moduleUrl);
+  URL.revokeObjectURL(moduleUrl);
+}catch(error){
+  console.error('RaziTech boot error:',error);
+  document.getElementById('root').innerHTML='<div id="boot"><div><b>رازی‌تک</b><small>خطا در بارگذاری سایت. صفحه را یک‌بار Refresh کنید.</small></div></div>';
+}
+</script>
+</body>
 </html>
