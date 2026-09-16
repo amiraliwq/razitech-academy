@@ -2,7 +2,7 @@ name: Deploy RaziTech Academy to GitHub Pages
 
 on:
   push:
-    branches: [main, 'build/**']
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -27,6 +27,7 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
